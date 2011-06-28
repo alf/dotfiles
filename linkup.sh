@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
-cwd=$(dirname $(pwd)/$0)
+
+if [[ $0 == /* ]]; then
+    cwd=$(dirname $0)
+else
+    cwd=$(dirname $(pwd)/$0)
+fi
 
 linkup () {
     target=$cwd/$1
