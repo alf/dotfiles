@@ -1,0 +1,7 @@
+[user]
+	name = Alf Lervag
+	email = alf.lervag@bouvet.no
+[alias]
+	di = diff
+	ci = commit
+	st = status
