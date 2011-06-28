@@ -3,3 +3,4 @@
 .hgrc
 .vimrc
 .pylintrc
+.zshenv

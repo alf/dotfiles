@@ -4,23 +4,12 @@ if [ ! "$already_sourced" ]; then
 else
   return
 fi
-#{{{1 Set environmental variables
-# General
-export HOSTNAME="`hostname -s`"
-export EDITOR="emacsclient"
-export XEDITOR="emacsclient --no-wait +%l %f"
-export OPSYS=$(uname)
-export HISTFILE="$HOME/.zsh_history"
-export HISTSIZE=20000
-export SAVEHIST=10000
-export PATH=/usr/local/bin:$PATH:$HOME/.gem/ruby/1.8/bin
-export FIGNORE=.svn:.DS_Store
+
+#{{{1 Virtualenv setup
 export WORKON_HOME=$HOME/.virtualenvs
 source /usr/local/Cellar/python/2.7.1/bin/virtualenvwrapper.sh
-export PAGER='less'
 
 #{{{1 Define aliases
-# General aliases
 alias mv="mv -i"
 alias cp="cp -i"
 alias du="du -c"
