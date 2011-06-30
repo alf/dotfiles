@@ -88,7 +88,7 @@ zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*:kill:*' force-list always
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:*:kill:*:processes' \
-       command 'ps --forest -u alf.lervag -o pid,user,cmd'
+       command 'ps -u alf.lervag -o pid,user,command'
 zstyle ':completion:*:processes-names' command 'ps axho command'
 
 #{{{1 Set command prompt
