@@ -6,14 +6,16 @@ else
 fi
 
 #{{{1 Virtualenv setup
-export WORKON_HOME=$HOME/.virtualenvs
-source /usr/local/Cellar/python/2.7.1/bin/virtualenvwrapper.sh
+#export WORKON_HOME=$HOME/.virtualenvs
+#source /usr/local/bin/virtualenvwrapper.sh
 
 #{{{1 Define aliases
 alias mv="mv -i"
 alias cp="cp -i"
 alias du="du -c"
 alias dato='date +"Uke %V, %A %d. %B, %Y -- %T"'
+alias vim=emacsclient
+alias e=emacsclient
 
 #{{{1 Options
 umask 022           # Default file permissions
@@ -52,6 +54,8 @@ zmodload -ap zsh/mapfile mapfile
 autoload -U compinit
 autoload -U colors
 autoload -U zsh/terminfo
+autoload -U select-word-style
+select-word-style bash
 compinit
 colors
 
