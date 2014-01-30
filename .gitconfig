@@ -9,10 +9,16 @@
         serve = !git daemon --reuseaddr --verbose --base-path=. --export-all ./.git
 [core]
 	pager = cat
-	excludesfile = /Users/alf/.gitglobalignore
+	excludesfile = /opt/boxen/config/git/gitignore
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+
+[credential]
+helper = /opt/boxen/bin/boxen-git-credential
+
+[hub]
+protocol = https

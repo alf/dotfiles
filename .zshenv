@@ -11,8 +11,11 @@ export FIGNORE=.svn:.DS_Store
 export PAGER='less'
 export NODE_PATH=/usr/local/lib/node_modules
 export PATH=/usr/local/bin:$HOME/local/bin:$PATH:$HOME/.gem/ruby/1.8/bin
-export PATH=$PATH:$(npm bin)
+#export PATH=$PATH:$(npm bin)
 export JAVA_HOME=$(/usr/libexec/java_home)
 
+if [[ -r /opt/boxen/env.sh ]]; then
+    . /opt/boxen/env.sh
+fi
 #{{{1 Modeline ----------------------------------------------------------------
 # vim: set foldmethod=marker ff=unix:
