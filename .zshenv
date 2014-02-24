@@ -13,6 +13,7 @@ export NODE_PATH=/usr/local/lib/node_modules
 export PATH=/usr/local/bin:$HOME/local/bin:$PATH:$HOME/.gem/ruby/1.8/bin
 #export PATH=$PATH:$(npm bin)
 export JAVA_HOME=$(/usr/libexec/java_home)
+export DOCKER_HOST=tcp://127.0.0.1:4243
 
 if [[ -r /opt/boxen/env.sh ]]; then
     . /opt/boxen/env.sh
