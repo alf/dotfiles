@@ -16,6 +16,9 @@ alias du="du -c"
 alias dato='date +"Uke %V, %A %d. %B, %Y -- %T"'
 alias vim=emacsclient
 alias e=emacsclient
+alias dip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
+alias dgc='docker rm $(docker ps -aq); docker rmi $(docker images -qf dangling=true)'
+function dssh() { ssh -l root $(dip $1); }
 
 #{{{1 Options
 umask 022           # Default file permissions
@@ -24,6 +27,7 @@ watch=all           # Notify all logins or logouts
 # Turn on/off some zsh options
 unsetopt bgnice
 setopt nohup
+setopt noflowcontrol
 setopt interactive_comments
 setopt clobber
 setopt extended_history \
@@ -96,19 +100,15 @@ zstyle ':completion:*:*:kill:*:processes' \
 zstyle ':completion:*:processes-names' command 'ps axho command'
 
 #{{{1 Set command prompt
-ps_blue="%{$terminfo[bold]$fg[blue]%}"
-ps_green="%{$terminfo[bold]$fg[green]%}"
-ps_red="%{$terminfo[bold]$fg[red]%}"
-ps_white="%{$terminfo[bold]$fg[white]%}"
-ps_reset="%{$terminfo[sgr0]%}"
-export PS1="$ps_blue%n$ps_white@$ps_green%m$ps_reset:$ps_red%3~$ps_reset%(!.#.$) " 
+autoload -U promptinit
+promptinit
+
+prompt redhat
 #export RPS1="$PR_LIGHT_YELLOW(%D{%m-%d %H:%M})$PR_NO_COLOR"
 
 #{{{1 Add some keybindings
-bindkey ' '    magic-space
-bindkey "^R"   history-incremental-search-backward
-bindkey "\e[Z" reverse-menu-complete
-bindkey "^U"   history-incremental-search-backward
+bindkey ' ' magic-space
+bindkey -M isearch '^@' accept-search
 
 #{{{1 Modeline ----------------------------------------------------------------
 # vim: set foldmethod=marker ff=unix:
