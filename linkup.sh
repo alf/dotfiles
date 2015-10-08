@@ -1,24 +1,14 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-if [[ $0 == /* ]]; then
-    cwd=$(dirname $0)
-else
-    cwd=$(dirname $(pwd)/$0)
-fi
-
-linkup () {
-    target=$cwd/$1
-    link=$HOME/$1
-
-    if [ -e "$link" -o -h "$link" ]; then
-	if [ ! "$target" -ef "$link" ]; then
-	    echo "$link has conflict that must be resolved manually."
-	fi
-    else
-	ln -s "$target" "$link"
-    fi
+link() {
+    ln -sf "$PWD/$1" "$HOME/$2"
 }
 
-while read FILE ; do
-    linkup $FILE
-done < $cwd/FILES
+link zshrc .zshrc
+link gitconfig .gitconfig
+link hgrc .hgrc
+link vimrc .vimrc
+link pylintrc .pylintrc
+link zshenv .zshenv
+link screenrc .screenrc
+link gitglobalignore .gitglobalignore
