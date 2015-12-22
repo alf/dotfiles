@@ -1,24 +1,34 @@
-# Check if already sourced
-if [ ! "$already_sourced" ]; then
-  already_sourced=1
-else
-  return
-fi
+#{{{1: Environment
 
-#{{{1 Virtualenv setup
-#export WORKON_HOME=$HOME/.virtualenvs
-#source /usr/local/bin/virtualenvwrapper.sh
+export ALTERNATE_EDITOR=""
+export EDITOR="emacsclient -nw"
+export XEDITOR="emacsclient --no-wait +%l %f"
+export CLICOLOR=1
+export HISTFILE="$HOME/.zsh_history"
+export HISTSIZE=20000
+export SAVEHIST=10000
+export FIGNORE=.svn:.DS_Store
+export PAGER='less'
+
+export LC_ALL=en_US.UTF-8
+export LC_LOGNAME=$USER
+
+typeset -U path # Get's rid of duplicate entries in the path
+export path=(~/bin $path /usr/local/bin)
 
 #{{{1 Define aliases
 alias mv="mv -i"
 alias cp="cp -i"
 alias du="du -c"
 alias dato='date +"Uke %V, %A %d. %B, %Y -- %T"'
-alias vim=emacsclient
-alias e=emacsclient
+alias vim="emacsclient -nw"
+alias e="emacsclient -nw"
 alias dip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
 alias dgc='docker rm $(docker ps -aq); docker rmi $(docker images -qf dangling=true)'
 function dssh() { ssh -l root $(dip $1); }
+
+# Make zsh work better when running in emacs
+[[ $EMACS ]] && unsetopt zle
 
 #{{{1 Options
 umask 022           # Default file permissions
@@ -110,5 +120,15 @@ prompt redhat
 bindkey ' ' magic-space
 bindkey -M isearch '^@' accept-search
 
+#{{{1 Custom configuration based on host and os
+
+# Set up configuration root folder
+local self zsh_root hostrc
+self=$HOME/.zshrc
+zsh_root=${self:A:h}/zsh
+hostrc=$zsh_root/zshrc_$(hostname -s).zsh 
+[[ -f $hostrc ]] && source $hostrc
+
 #{{{1 Modeline ----------------------------------------------------------------
 # vim: set foldmethod=marker ff=unix:
+
